@@ -12,8 +12,10 @@ app.listen(process.env.PORT || 3000, function(){
 app.get('/', function (req, res) {
     res.send('Final Editing');
 });
-// Facebook Webhook
-app.get('/webhook', function (req, res) {
+	
+
+// Facebook Webhook 
+app.get('https://khayeematetesting.com/webhooks', function (req, res) {
     if (req.query['hub.verify_token'] === 'testbot_verify_token') {
         res.send(req.query['hub.challenge']);
     } else {
