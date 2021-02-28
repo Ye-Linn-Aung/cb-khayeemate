@@ -10,7 +10,7 @@ app.listen(process.env.PORT || 3000, function(){
     });
 // Server frontpage
 app.get('/', function (req, res) {
-    res.send('This is Test Haha Server');
+    res.send('Final Editing');
 });
 // Facebook Webhook
 app.get('/webhook', function (req, res) {
