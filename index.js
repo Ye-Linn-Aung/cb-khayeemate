@@ -15,7 +15,7 @@ app.get('/', function (req, res) {
 	
 
 // Facebook Webhook 
-app.get('https://khayeematetesting.com/webhooks', function (req, res) {
+app.get('/webhooks', function (req, res) {
     if (req.query['hub.verify_token'] === 'testbot_verify_token') {
         res.send(req.query['hub.challenge']);
     } else {
