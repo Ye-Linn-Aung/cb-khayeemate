@@ -98,17 +98,4 @@ function kittenMessage(recipientId, text) {
         }
     }   
     return false;  
-};  
-
-  await context.sendButtonTemplate('What do you want to do next?', [
-  {
-    type: 'web_url',
-    url: 'https://petersapparel.parseapp.com',
-    title: 'Show Website',
-  },
-  {
-    type: 'postback',
-    title: 'Start Chatting',
-    payload: 'USER_DEFINED_PAYLOAD',
-  },
-]);
+}; 
