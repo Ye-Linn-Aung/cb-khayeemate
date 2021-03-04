@@ -96,8 +96,29 @@ function kittenMessage(recipientId, text) {
             
             return true;
         }
-    }
-    
-    return false;
-    
-}; 
+    }   
+    return false;  
+};  
+
+curl -X POST -H "Content-Type: application/json" -d '{
+  "recipient":{
+    "id":"<PSID>"
+  },
+  "messaging_type": "RESPONSE",
+  "message":{
+    "text": "Pick a color:",
+    "quick_replies":[
+      {
+        "content_type":"text",
+        "title":"Red",
+        "payload":"<POSTBACK_PAYLOAD>",
+        "image_url":"http://example.com/img/red.png"
+      },{
+        "content_type":"text",
+        "title":"Green",
+        "payload":"<POSTBACK_PAYLOAD>",
+        "image_url":"http://example.com/img/green.png"
+      }
+    ]
+  }
+}' "https://graph.facebook.com/v10.0/me/messages?access_token=<PAGE_ACCESS_TOKEN>"
