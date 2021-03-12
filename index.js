@@ -22,8 +22,104 @@ app.get('/webhook', function (req, res) {
         res.send('Invalid verify token');
     }
 });  
-curl -X POST -H "Content-Type: application/json" -d '{ 
-"get_started":{
-    "payload":"GET_PAYLOAD_PAAYLLOAD"
-}
-}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAALPiZB55UboBAADOCunxh1p1dznEQZBajOCyNU2ZBAZBdHYiGKc4ZBZAP0WopGuIoZAExxt26su3G68y0bKq89N3Qpfi3XhI1jbqbRpoH9ghF2NxCua3ZBgkQH3S4U96vmU2cmUyN77EZBU6002cga8oLaOGrZAtJr8sjb2xTpqeExogg9WJ8NTq3"
+
+// handler receiving messages
+app.post('/webhook', function (req, res) { 
+    setupGetStartedButton();
+    var events = req.body.entry[0].messaging;
+    for (i = 0; i < events.length; i++) {
+        var event = events[i];
+        if (event.message) {
+            if (!kittenMessage(event.sender.id, event.message.text)) {
+                sendMessage(event.sender.id);
+            }
+        } else if (event.postback) {
+            console.log("Postback received: " + JSON.stringify(event.postback));
+        }
+    }
+    res.sendStatus(200);
+});
+
+// generic function sending messages
+function sendMessage(recipientId, message) {
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+        method: 'POST',
+        json: {
+            recipient: {id: recipientId},
+            message: message,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending message: ', error);
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error);
+        }
+    });
+};
+// send rich message with kitten
+function kittenMessage(recipientId, text) {
+    
+    text = text || "";
+    var values = text.split(' ');
+    
+    if (values.length === 3 && values[0] === 'kitten') {
+        if (Number(values[1]) > 0 && Number(values[2]) > 0) {
+            
+            var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
+            
+            message = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [{
+                            "title": "Kitten",
+                            "subtitle": "Cute kitten picture",
+                            "image_url": imageUrl ,
+                            "buttons": [{
+                                "type": "web_url",
+                                "url": imageUrl,
+                                "title": "Show kitten"
+                                }, {
+                                "type": "postback",
+                                "title": "I like this",
+                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                            }]
+                        }]
+                    }
+                }
+            };
+    
+            sendMessage(recipientId, message);
+            
+            return true;
+        }
+    }   
+    return false;  
+};  
+
+function setupGetStartedButton(res){
+    var messageData = {
+            "get_started":[
+            {
+                "payload":"DEV_FIRST_GT"
+                }
+            ]
+    };
+    // Start the request
+    request({
+        sendMessage(recipientId, message);
+    },
+    function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            // Print out the response body
+            res.send(body);
+
+        } else { 
+            // TODO: Handle errors
+            res.send(body);
+        }
+    });
+}  
