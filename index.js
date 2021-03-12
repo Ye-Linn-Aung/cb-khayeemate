@@ -25,7 +25,6 @@ app.get('/webhook', function (req, res) {
 
 // handler receiving messages
 app.post('/webhook', function (req, res) { 
-    setupGetStartedButton();
     var events = req.body.entry[0].messaging;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
@@ -53,6 +52,9 @@ function sendMessage(recipientId, message) {
     }, function(error, response, body) {
         if (error) {
             console.log('Error sending message: ', error);
+        } if (!error && setupGetStartedButton == 200) {
+            // Print out the response body
+            res.send(body);
         } else if (response.body.error) {
             console.log('Error: ', response.body.error);
         }
@@ -104,22 +106,8 @@ function setupGetStartedButton(res){
     var messageData = {
             "get_started":[
             {
-                "payload":"DEV_FIRST_GT"
+                "payload":"USER_DEFINED_PAYLOAD"
                 }
-            ]
-    };
-    // Start the request
-    request({
-        sendMessage(recipientId, message);
-    },
-    function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            // Print out the response body
-            res.send(body);
-
-        } else { 
-            // TODO: Handle errors
-            res.send(body);
-        }
-    });
-}  
+            ]  
+    }
+};
