@@ -32,7 +32,13 @@ app.post('/webhook', function (req, res) {
             if (!kittenMessage(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id);
             }
-        } else if (event.postback) {
+        }
+        if (event.message) {
+            if (!sendButtonMessage(event.sender.id, event.message.text)) {
+                sendMessage(event.sender.id);
+            }
+        }
+        else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
         }
     }
@@ -52,9 +58,6 @@ function sendMessage(recipientId, message) {
     }, function(error, response, body) {
         if (error) {
             console.log('Error sending message: ', error);
-        } if (!error && setupGetStartedButton == 200) {
-            // Print out the response body
-            res.send(body);
         } else if (response.body.error) {
             console.log('Error: ', response.body.error);
         }
@@ -100,14 +103,40 @@ function kittenMessage(recipientId, text) {
         }
     }   
     return false;  
-};  
+};   
 
-function setupGetStartedButton(res){
-    var messageData = {
-            "get_started":[
-            {
-                "payload":"USER_DEFINED_PAYLOAD"
+function sendButtonMessage(recipientId, text) { 
+    text = text || "";
+    var values = text.split(' ');
+    if (values.length === 3 && values[0] === 'button') {
+        var messageData = {
+            recipient: {
+              id: recipientId
+            },
+            message: {
+              attachment: {
+                type: "template",
+                payload: {
+                  template_type: "button",
+                  text: "This is test text",
+                  buttons:[{
+                    type: "web_url",
+                    url: "https://www.oculus.com/en-us/rift/",
+                    title: "Open Web URL"
+                  }, {
+                    type: "postback",
+                    title: "Trigger Postback",
+                    payload: "DEVELOPER_DEFINED_PAYLOAD"
+                  }, {
+                    type: "phone_number",
+                    title: "Call Phone Number",
+                    payload: "+16505551234"
+                  }]
                 }
-            ]  
-    }
-};
+              }
+            }
+          };  
+          sendMessage(recipientId, message);    
+                  return true;
+    } 
+  }
