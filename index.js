@@ -123,7 +123,7 @@ function sendButtonMessage(recipientId, text) {
                   }, {
                     type: "blahblah",
                     title: "kitten 300 200",
-                    // payload: "DEVELOPER_DEFINED_PAYLOAD"
+                    payload: "kitten 300 200"
                   }, {
                     type: "phone_number",
                     title: "Call Phone Number",
@@ -135,5 +135,5 @@ function sendButtonMessage(recipientId, text) {
           sendMessage(recipientId, message);    
                   return true;
     }
-} 
+}    
   }
