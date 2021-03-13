@@ -108,7 +108,8 @@ function kittenMessage(recipientId, text) {
 function sendButtonMessage(recipientId, text) { 
     text = text || "";
     var values = text.split(' ');
-    if (values.length === 3 && values[0] === 'button') {
+    if (values.length === 3 && values[0] === 'button') { 
+        if (Number(values[1]) > 0 && Number(values[2]) > 0) {
         var messageData = {
             recipient: {
               id: recipientId
@@ -136,7 +137,8 @@ function sendButtonMessage(recipientId, text) {
               }
             }
           };  
-          sendMessage(recipientId, message);    
+                 sendMessage(recipientId, message);    
                   return true;
-    } 
+    }
+} 
   }
