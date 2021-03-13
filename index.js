@@ -110,16 +110,12 @@ function sendButtonMessage(recipientId, text) {
     var values = text.split(' ');
     if (values.length === 3 && values[0] === 'button') { 
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
-        var messageData = {
-            recipient: {
-              id: recipientId
-            },
-            message: {
-              attachment: {
-                type: "template",
-                payload: {
-                  template_type: "button",
-                  text: "This is test text",
+            message = {
+              "attachment": {
+                "type": "template",
+                "payload": {
+                  "template_type": "button",
+                  "text": "This is test text",
                   buttons:[{
                     type: "web_url",
                     url: "https://www.oculus.com/en-us/rift/",
@@ -135,9 +131,8 @@ function sendButtonMessage(recipientId, text) {
                   }]
                 }
               }
-            }
-          };  
-                 sendMessage(recipientId, message);    
+            }  
+          sendMessage(recipientId, message);    
                   return true;
     }
 } 
