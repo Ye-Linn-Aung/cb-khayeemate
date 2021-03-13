@@ -118,16 +118,16 @@ function sendButtonMessage(recipientId, text) {
                   "text": "This is test text",
                   buttons:[{
                     type: "web_url",
-                    url: "https://www.oculus.com/en-us/rift/",
+                    url: "https://www.neptunemm.com/",
                     title: "Open Web URL"
                   }, {
-                    type: "text",
-                    title: "kitten 300 200",
-                    payload: kittenMessage(),
+                    type: "postback",
+                    title: "Trigger Postback",
+                    payload: "DEVELOPER_DEFINED_PAYLOAD"
                   }, {
                     type: "phone_number",
                     title: "Call Phone Number",
-                    payload: "+16505551234"
+                    payload: "09967669132"
                   }]
                 }
               }
