@@ -121,9 +121,9 @@ function sendButtonMessage(recipientId, text) {
                     url: "https://www.oculus.com/en-us/rift/",
                     title: "Open Web URL"
                   }, {
-                    type: "blahblah",
+                    type: "text",
                     title: "kitten 300 200",
-                    payload: "kitten 300 200"
+                    payload: kittenMessage(),
                   }, {
                     type: "phone_number",
                     title: "Call Phone Number",
