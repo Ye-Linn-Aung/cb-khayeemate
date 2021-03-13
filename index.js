@@ -121,13 +121,13 @@ function sendButtonMessage(recipientId, text) {
                     url: "https://www.oculus.com/en-us/rift/",
                     title: "Open Web URL"
                   }, {
-                    type: "postback",
-                    title: "Trigger Postback",
-                    payload: "DEVELOPER_DEFINED_PAYLOAD"
+                    type: "blahblah",
+                    title: "kitten 300 200",
+                    // payload: "DEVELOPER_DEFINED_PAYLOAD"
                   }, {
                     type: "phone_number",
                     title: "Call Phone Number",
-                    payload: "09967669132"
+                    payload: "+16505551234"
                   }]
                 }
               }
