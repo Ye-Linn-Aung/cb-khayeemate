@@ -26,7 +26,7 @@ app.get('/webhook', function (req, res) {
 // handler receiving messages
 app.post('/webhook', function (req, res) { 
     var events = req.body.entry[0].messaging; 
-    var messageText = message.text;
+    var quickReply = message.quick_reply;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message) {
@@ -39,15 +39,16 @@ app.post('/webhook', function (req, res) {
                 sendMessage(event.sender.id);
             }
         } 
+        if (quickReply) {
+            if (sendQuickReply(event.sender.id, message.text)) {
+                sendMessage(event.sender.id);
+            }
+        } 
         else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
         }
     } 
-    if (messageText) {
-        if (sendQuickReply(event.sender.id, event.message.text)) {
-            sendMessage(event.sender.id);
-        }
-    }
+    
     res.sendStatus(200);
 });
 
@@ -144,7 +145,9 @@ function sendButtonMessage(recipientId, text) {
 }    
   }; 
 
-  function sendQuickReply(recipientId,message) {  
+  function sendQuickReply(recipientId,text) {   
+    text = text || "";
+    var values = text.split(' ');
         message = {
             message: {
                 text: "hey",
