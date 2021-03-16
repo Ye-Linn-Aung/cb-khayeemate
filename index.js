@@ -143,30 +143,33 @@ function sendButtonMessage(recipientId, text) {
 }    
   }; 
 
-  function sendChooseButton(recipientId, text) { 
+  function sendChooseButton(recipientId, text) {  
     text = text || "";
-            message = {
-                "messaging_type": "RESPONSE",
-                "message":{
-                  "text": "Hi",
-                  "quick_replies":[
-                    {
-                      "content_type":"text",
-                      "title":"Yangon",
-                      "payload":"DEVELOPER_DEFINED_PAYLOAD",
-                    },{
-                      "content_type":"text",
-                      "title":"Mandalay",
-                      "payload":"DEVELOPER_DEFINED_PAYLOAD",
-                    },
-                    {
-                        "content_type":"text",
-                        "title":"Taunggyi",
-                        "payload":"DEVELOPER_DEFINED_PAYLOAD",
-                      }
-                  ]
-                }
+    var values = text.split(' ');
+    if (values.length === 3 && values[0] === 'hii') {
+        message = {
+            message: {
+                text: "hey",
+                quick_replies: [
+                  {
+                    "content_type":"text",
+                    "title":"Action",
+                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"Comedy",
+                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"Drama",
+                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+                  }
+                ]
+              } 
             } 
-          sendMessage(recipientId, message);    
-                  return true;   
-  }
+            sendMessage(recipientId, message);    
+            return true;
+    }
+    }
