@@ -39,13 +39,13 @@ app.post('/webhook', function (req, res) {
                 sendMessage(event.sender.id);
             }
         } 
-        if (messageText) {
-            if (sendQuickReply(event.sender.id, event.message.text)) {
-                sendMessage(event.sender.id);
-            }
-        }
         else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
+        }
+    } 
+    if (messageText) {
+        if (sendQuickReply(event.sender.id, event.message.text)) {
+            sendMessage(event.sender.id);
         }
     }
     res.sendStatus(200);
