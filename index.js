@@ -38,6 +38,11 @@ app.post('/webhook', function (req, res) {
                 sendMessage(event.sender.id);
             }
         }
+        if (event.message) {
+            if (!sendChooseButton(event.sender.id, event.message.text)) {
+                sendMessage(event.sender.id);
+            }
+        }
         else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
         }
@@ -129,6 +134,41 @@ function sendButtonMessage(recipientId, text) {
                     title: "Call Phone Number",
                     payload: "09967669132"
                   }]
+                }
+              }
+            }  
+          sendMessage(recipientId, message);    
+                  return true;
+    }
+}    
+  }; 
+
+  function sendChooseButton(recipientId, text) { 
+    text = text || "";
+    var values = text.split(' ');
+    if (values.length === 3 && values[0] === 'Hi') { 
+        if (Number(values[1]) > 0 && Number(values[2]) > 0) {
+            message = {
+              "attachment": {
+                "messaging_type": "RESPONSE",
+                "message":{
+                  "text": "Where Would You Like To Go?",
+                  "quick_replies":[
+                    {
+                      "content_type":"text",
+                      "title":"Yangon",
+                      "payload":"<POSTBACK_PAYLOAD>",
+                    },{
+                      "content_type":"text",
+                      "title":"Mandalay",
+                      "payload":"<POSTBACK_PAYLOAD>",
+                    },
+                    {
+                        "content_type":"text",
+                        "title":"Taunggyi",
+                        "payload":"<POSTBACK_PAYLOAD>",
+                      }
+                  ]
                 }
               }
             }  
