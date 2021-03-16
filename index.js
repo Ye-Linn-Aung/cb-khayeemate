@@ -144,6 +144,7 @@ function sendButtonMessage(recipientId, text) {
   }; 
 
   function sendChooseButton(recipientId, text) { 
+    text = text || "";
             message = {
                 "messaging_type": "RESPONSE",
                 "message":{
