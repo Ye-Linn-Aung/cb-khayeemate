@@ -39,7 +39,7 @@ app.post('/webhook', function (req, res) {
             }
         }
         if (event.message) {
-            if (!sendChooseButton(event.sender.id, event.message.text)) {
+            if (sendQuickReply(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id);
             }
         }
@@ -143,10 +143,7 @@ function sendButtonMessage(recipientId, text) {
 }    
   }; 
 
-  function sendChooseButton(recipientId, text) {  
-    text = text || "";
-    var values = text.split(' ');
-    if (values.length === 3 && values[0] === 'hii') {
+  function sendQuickReply(recipientId) {  
         message = {
             message: {
                 text: "hey",
@@ -171,5 +168,4 @@ function sendButtonMessage(recipientId, text) {
             } 
             sendMessage(recipientId, message);    
             return true;
-    }
     }
