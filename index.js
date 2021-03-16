@@ -40,7 +40,7 @@ app.post('/webhook', function (req, res) {
             }
         } 
         if (quickReply) {
-            if (sendQuickReply(event.sender.id, message.text)) {
+            if (sendQuickReply(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id);
             }
         } 
