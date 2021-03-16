@@ -144,15 +144,10 @@ function sendButtonMessage(recipientId, text) {
   }; 
 
   function sendChooseButton(recipientId, text) { 
-    text = text || "";
-    var values = text.split(' ');
-    if (values.length === 3 && values[0] === 'Hi') { 
-        if (Number(values[1]) > 0 && Number(values[2]) > 0) {
             message = {
-              "attachment": {
                 "messaging_type": "RESPONSE",
                 "message":{
-                  "text": "Where Would You Like To Go?",
+                  "text": "Hi",
                   "quick_replies":[
                     {
                       "content_type":"text",
@@ -170,10 +165,7 @@ function sendButtonMessage(recipientId, text) {
                       }
                   ]
                 }
-              }
-            }  
+            } 
           sendMessage(recipientId, message);    
-                  return true;
-    }
-}    
+                  return true;   
   }
