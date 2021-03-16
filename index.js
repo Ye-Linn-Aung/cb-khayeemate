@@ -157,16 +157,16 @@ function sendButtonMessage(recipientId, text) {
                     {
                       "content_type":"text",
                       "title":"Yangon",
-                      "payload":"<POSTBACK_PAYLOAD>",
+                      "payload":"DEVELOPER_DEFINED_PAYLOAD",
                     },{
                       "content_type":"text",
                       "title":"Mandalay",
-                      "payload":"<POSTBACK_PAYLOAD>",
+                      "payload":"DEVELOPER_DEFINED_PAYLOAD",
                     },
                     {
                         "content_type":"text",
                         "title":"Taunggyi",
-                        "payload":"<POSTBACK_PAYLOAD>",
+                        "payload":"DEVELOPER_DEFINED_PAYLOAD",
                       }
                   ]
                 }
