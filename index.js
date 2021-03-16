@@ -37,8 +37,8 @@ app.post('/webhook', function (req, res) {
             if (!sendButtonMessage(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id);
             }
-        }
-        if (event.message) {
+        } 
+        if (messageText) {
             if (sendQuickReply(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id);
             }
