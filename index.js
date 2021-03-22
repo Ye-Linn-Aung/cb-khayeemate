@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
+const { text } = require('body-parser');
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -37,12 +38,12 @@ app.post('/webhook', function (req, res) {
             if (!sendButtonMessage(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id);
             } 
-        } 
-	if(event.message){
+        }    
+        if(event.message){
              if(!sendQuickReply(event.sender.id, event.message.text)){
                 sendMessage(event.sender.id); 
              }
-        }    
+        }
         else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
         }
@@ -72,11 +73,8 @@ function sendMessage(recipientId, message) {
 function kittenMessage(recipientId, text) {
     
     text = text || "";
-    var values = text.split(' ');
-    
-    if (values.length === 3 && values[0] === 'kitten') {
-        if (Number(values[1]) > 0 && Number(values[2]) > 0) {
-            
+    var values = text.split('');
+    if (values[0] === 'kitten') {
             var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
             
             message = {
@@ -101,20 +99,16 @@ function kittenMessage(recipientId, text) {
                     }
                 }
             };
-    
             sendMessage(recipientId, message);
-            
-            return true;
-        }
+            return true;  
     }   
     return false;  
 };   
 
 function sendButtonMessage(recipientId, text) { 
     text = text || "";
-    var values = text.split(' ');
-    if (values.length === 3 && values[0] === 'button') { 
-        if (Number(values[1]) > 0 && Number(values[2]) > 0) {
+    var values = text.split();
+    if (values[0] === 'button') { 
             message = {
               "attachment": {
                 "type": "template",
@@ -138,12 +132,11 @@ function sendButtonMessage(recipientId, text) {
               }
             }  
           sendMessage(recipientId, message);    
-                  return true;
-    }
+                  return true;   
 }    
-  };
-
-function sendQuickReply(recipientId, text) { 
+  };   
+  
+  function sendQuickReply(recipientId, text) { 
     text = text || "";
     var values = text.split(); 
     if (values[0] === 'movie') {
