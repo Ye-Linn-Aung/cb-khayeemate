@@ -37,7 +37,12 @@ app.post('/webhook', function (req, res) {
             if (!sendButtonMessage(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id);
             } 
-        }
+        } 
+	if(event.message){
+             if(!sendQuickReply(event.sender.id, event.message.text)){
+                sendMessage(event.sender.id); 
+             }
+        }    
         else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
         }
@@ -136,4 +141,34 @@ function sendButtonMessage(recipientId, text) {
                   return true;
     }
 }    
-  };   
+  };
+
+function sendQuickReply(recipientId, messageData) {
+    var messageData = {
+      recipient: {
+        id: recipientId
+      },
+      message: {
+        text: "movie",
+        quick_replies: [
+          {
+            "content_type":"text",
+            "title":"Action",
+            "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+          },
+          {
+            "content_type":"text",
+            "title":"Comedy",
+            "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+          },
+          {
+            "content_type":"text",
+            "title":"Drama",
+            "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+          }
+        ]
+      }
+    };
+    sendMessage(recipientId, messageData);    
+                  return true;
+  }
