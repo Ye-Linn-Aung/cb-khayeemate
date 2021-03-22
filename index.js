@@ -149,7 +149,7 @@ function sendQuickReply(recipientId, text) {
     if (values.length === 3 && values[0] === 'movie') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
             message = {
-                text: "movie 300 200",
+                text: "movie",
                 quick_replies: [
                   { 
                     "content_type":"text",
