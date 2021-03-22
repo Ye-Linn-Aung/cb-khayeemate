@@ -75,7 +75,7 @@ function kittenMessage(recipientId, text) {
     text = text || "";
     var values = text.split('');
     if (values[0] === 'kitten') {
-            var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
+            var imageUrl = "https://placekitten.com/";
             
             message = {
                 "attachment": {
