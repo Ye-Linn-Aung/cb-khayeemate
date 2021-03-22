@@ -145,8 +145,8 @@ function sendButtonMessage(recipientId, text) {
 
 function sendQuickReply(recipientId, text) { 
     text = text || "";
-    var values = text.split(' '); 
-    if (values === 'movie') {
+    var values = text.split(); 
+    if (values[0] === 'movie') {
             message = {
                 text: "movie",
                 quick_replies: [
