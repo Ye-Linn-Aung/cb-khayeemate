@@ -146,8 +146,7 @@ function sendButtonMessage(recipientId, text) {
 function sendQuickReply(recipientId, text) { 
     text = text || "";
     var values = text.split(' '); 
-    if (values.length === 3 && values[0] === 'movie') {
-        if (Number(values[1]) > 0 && Number(values[2]) > 0) {
+    if (values === 'movie') {
             message = {
                 text: "movie",
                 quick_replies: [
@@ -169,7 +168,6 @@ function sendQuickReply(recipientId, text) {
                 ]
               }
             sendMessage(recipientId, message);    
-                          return true;
-        }
-    }  
+                          return true; 
+    }
   };
