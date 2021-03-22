@@ -37,11 +37,6 @@ app.post('/webhook', function (req, res) {
             if (!sendButtonMessage(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id);
             } 
-        }    
-        if(received_message.text){
-            if (!handleMessage(event.sender.id, event.message.text)) {
-                sendMessage(event.sender.id);
-            }
         }
         else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
@@ -142,21 +137,3 @@ function sendButtonMessage(recipientId, text) {
     }
 }    
   };   
-  
-  function handleMessage(recipientId, text) {
-
-    let text;
-    // Check if the message contains text
-    if (received_message.text) {    
-      // Create the payload for a basic text message
-      text = {
-        "text": `You sent the message: "${received_message.text}". Now send me an image!`
-      }
-    }  
-    
-    // Sends the response message
-    sendMessage(recipientId, text); 
-    return true;   
-  }
-
-  
