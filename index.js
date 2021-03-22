@@ -44,6 +44,11 @@ app.post('/webhook', function (req, res) {
                 sendMessage(event.sender.id); 
              }
         }
+        if(event.message){
+            if(!sendReplyYgn(event.sender.id, event.message.text)){
+               sendMessage(event.sender.id); 
+            }
+       }
         else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
         }
@@ -145,7 +150,7 @@ function sendButtonMessage(recipientId, text) {
                 quick_replies: [
                   { 
                     "content_type":"text",
-                    "title":"Action",
+                    "title":"yangon",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
                   },
                   {
@@ -156,6 +161,34 @@ function sendButtonMessage(recipientId, text) {
                   {
                     "content_type":"text",
                     "title":"Drama",
+                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+                  }
+                ]
+              }
+            sendMessage(recipientId, message);    
+                          return true; 
+    }
+  }; 
+  function sendReplyYgn(recipientId, text) { 
+    text = text || "";
+    var values = text.split(); 
+    if (values[0] === 'yangon') {
+            message = {
+                text: "movie",
+                quick_replies: [
+                  { 
+                    "content_type":"text",
+                    "title":"Pabedan",
+                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"Latha",
+                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"Lanmadaw",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
                   }
                 ]
