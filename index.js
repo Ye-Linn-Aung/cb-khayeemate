@@ -149,20 +149,20 @@ function sendQuickReply(recipientId, text) {
     if (values.length === 3 && values[0] === 'movie') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
             message = {
-                text: text,
+                text: "movie 300 200",
                 quick_replies: [
-                  {
-                    "content_type":text,
+                  { 
+                    "content_type":"text",
                     "title":"Action",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
                   },
                   {
-                    "content_type":text,
+                    "content_type":"text",
                     "title":"Comedy",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
                   },
                   {
-                    "content_type":text,
+                    "content_type":"text",
                     "title":"Drama",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
                   }
@@ -171,5 +171,5 @@ function sendQuickReply(recipientId, text) {
             sendMessage(recipientId, message);    
                           return true;
         }
-    }     
+    }  
   };
