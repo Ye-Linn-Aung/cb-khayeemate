@@ -190,5 +190,29 @@ function sendButtonMessage(recipientId, text) {
               }
             sendMessage(recipientId, message);    
                           return true; 
-    }
+    } 
+    if (values[0] === 'English') {
+      message = {
+          text: "Choose Your City",
+          quick_replies: [
+            { 
+              "content_type":"text",
+              "title":"Yangon",
+              "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+            },
+            {
+              "content_type":"text",
+              "title":"Mandalay",
+              "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+            },
+            {
+              "content_type":"text",
+              "title":"Taunggyi",
+              "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+            }
+          ]
+        }
+      sendMessage(recipientId, message);    
+                    return true; 
+}
   };
