@@ -45,7 +45,7 @@ app.post('/webhook', function (req, res) {
              }
         }
         if(event.message){
-            if(!sendReplyYgn(event.sender.id, event.message.text)){
+            if(!sendReplymm(event.sender.id, event.message.text)){
                sendMessage(event.sender.id); 
             }
        }
@@ -144,23 +144,46 @@ function sendButtonMessage(recipientId, text) {
   function sendQuickReply(recipientId, text) { 
     text = text || "";
     var values = text.split(); 
-    if (values[0] === 'movie') {
+    if (values[0] === 'hi' || values[1] === 'Hi') {
             message = {
-                text: "movie",
+                text: "Choose Your Language",
                 quick_replies: [
                   { 
                     "content_type":"text",
-                    "title":"yangon",
+                    "title":"Myanmar",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
                   },
                   {
                     "content_type":"text",
-                    "title":"Comedy",
+                    "title":"English",
+                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+                  },
+                ]
+              }
+            sendMessage(recipientId, message);    
+                          return true; 
+    }
+  }; 
+  function sendReplymm(recipientId, text) { 
+    text = text || "";
+    var values = text.split(); 
+    if (values[0] === 'Myanmar') {
+            message = {
+                text: "Choose Your City",
+                quick_replies: [
+                  { 
+                    "content_type":"text",
+                    "title":"ရန်ကုန်",
+                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"မန္တလေး",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
                   },
                   {
                     "content_type":"text",
-                    "title":"Drama",
+                    "title":"တောင်ကြီး",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
                   }
                 ]
@@ -168,27 +191,27 @@ function sendButtonMessage(recipientId, text) {
             sendMessage(recipientId, message);    
                           return true; 
     }
-  }; 
-  function sendReplyYgn(recipientId, text) { 
+  };
+  function sendReplymm(recipientId, text) { 
     text = text || "";
     var values = text.split(); 
-    if (values[0] === 'yangon') {
+    if (values[0] === 'English') {
             message = {
-                text: "movie",
+                text: "Choose Your City",
                 quick_replies: [
                   { 
                     "content_type":"text",
-                    "title":"Pabedan",
+                    "title":"Yangon",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
                   },
                   {
                     "content_type":"text",
-                    "title":"Latha",
+                    "title":"Mandalay",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
                   },
                   {
                     "content_type":"text",
-                    "title":"Lanmadaw",
+                    "title":"Taunggyi",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
                   }
                 ]
