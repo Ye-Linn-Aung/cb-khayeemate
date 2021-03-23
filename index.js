@@ -79,7 +79,7 @@ function kittenMessage(recipientId, text) {
     
     text = text || "";
     var values = text.split();
-    if (values[0] === 'kitten') {
+    if (values[0] === 'ရန်ကုန်') {
             var imageUrl = "https://placekitten.com/";
             
             message = {
@@ -111,35 +111,35 @@ function kittenMessage(recipientId, text) {
 };   
 
 function sendButtonMessage(recipientId, text) { 
-    text = text || "";
-    var values = text.split();
-    if (values[0] === 'ရန်ကုန်') { 
-            message = {
-              "attachment": {
-                "type": "template",
-                "payload": {
-                  "template_type": "button",
-                  "text": "This is test text",
-                  buttons:[{
-                    type: "web_url",
-                    url: "https://www.neptunemm.com/",
-                    title: "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
-                  },{
-                    type: "phone_number",
-                    title: "ဖုန်းခေါ်ရန်",
-                    payload: "09967669132"
-                  }, {
-                    type: "text",
-                    title: "ထပ်ပြရန်",
-                    payload: "DEVELOPER_DEFINED_PAYLOAD"
-                  }]
-                }
+  text = text || "";
+  var values = text.split();
+  if (values[0] === 'button') { 
+          message = {
+            "attachment": {
+              "type": "template",
+              "payload": {
+                "template_type": "button",
+                "text": "This is test text",
+                buttons:[{
+                  type: "web_url",
+                  url: "https://www.neptunemm.com/",
+                  title: "Open Web URL"
+                }, {
+                  type: "postback",
+                  title: "Trigger Postback",
+                  payload: "DEVELOPER_DEFINED_PAYLOAD"
+                }, {
+                  type: "phone_number",
+                  title: "Call Phone Number",
+                  payload: "09967669132"
+                }]
               }
-            }  
-          sendMessage(recipientId, message);    
-                  return true;   
+            }
+          }  
+        sendMessage(recipientId, message);    
+                return true;   
 }    
-  };   
+};   
   
   function sendQuickReply(recipientId, text) { 
     text = text || "";
