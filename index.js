@@ -113,7 +113,7 @@ function kittenMessage(recipientId, text) {
 function sendButtonMessage(recipientId, text) { 
     text = text || "";
     var values = text.split();
-    if (values[0] === 'button') { 
+    if (values[0] === 'ရန်ကုန်') { 
             message = {
               "attachment": {
                 "type": "template",
@@ -123,15 +123,15 @@ function sendButtonMessage(recipientId, text) {
                   buttons:[{
                     type: "web_url",
                     url: "https://www.neptunemm.com/",
-                    title: "Open Web URL"
-                  }, {
-                    type: "postback",
-                    title: "Trigger Postback",
-                    payload: "DEVELOPER_DEFINED_PAYLOAD"
-                  }, {
+                    title: "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
+                  },{
                     type: "phone_number",
-                    title: "Call Phone Number",
+                    title: "ဖုန်းခေါ်ရန်",
                     payload: "09967669132"
+                  }, {
+                    type: "text",
+                    title: "ထပ်ပြရန်",
+                    payload: "DEVELOPER_DEFINED_PAYLOAD"
                   }]
                 }
               }
