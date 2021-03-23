@@ -146,7 +146,7 @@ function sendButtonMessage(recipientId, text) {
     var values = text.split(); 
     if (values[0] === 'hi' || values[0] === 'Hi') {
             message = {
-                text: "Choose Your Language",
+                text: "Choose Language",
                 quick_replies: [
                   { 
                     "content_type":"text",
@@ -185,6 +185,16 @@ function sendButtonMessage(recipientId, text) {
                     "content_type":"text",
                     "title":"တောင်ကြီး",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"နေပြည်တော်",
+                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"မော်လမြိုင်",
+                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
                   }
                 ]
               }
@@ -208,6 +218,16 @@ function sendButtonMessage(recipientId, text) {
             {
               "content_type":"text",
               "title":"Taunggyi",
+              "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+            }, 
+            {
+              "content_type":"text",
+              "title":"Naypyidaw",
+              "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
+            },
+            {
+              "content_type":"text",
+              "title":"Mawlamyine",
               "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
             }
           ]
