@@ -144,7 +144,7 @@ function sendButtonMessage(recipientId, text) {
   function sendQuickReply(recipientId, text) { 
     text = text || "";
     var values = text.split(); 
-    if (values[0] === 'hi' || values[1] === 'Hi') {
+    if (values[0] === 'hi' || values[0] === 'Hi') {
             message = {
                 text: "Choose Your Language",
                 quick_replies: [
@@ -184,34 +184,6 @@ function sendButtonMessage(recipientId, text) {
                   {
                     "content_type":"text",
                     "title":"တောင်ကြီး",
-                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
-                  }
-                ]
-              }
-            sendMessage(recipientId, message);    
-                          return true; 
-    }
-  };
-  function sendReplymm(recipientId, text) { 
-    text = text || "";
-    var values = text.split(); 
-    if (values[0] === 'English') {
-            message = {
-                text: "Choose Your City",
-                quick_replies: [
-                  { 
-                    "content_type":"text",
-                    "title":"Yangon",
-                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
-                  },
-                  {
-                    "content_type":"text",
-                    "title":"Mandalay",
-                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
-                  },
-                  {
-                    "content_type":"text",
-                    "title":"Taunggyi",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
                   }
                 ]
