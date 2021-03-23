@@ -88,18 +88,18 @@ function kittenMessage(recipientId, text) {
                     "payload": {
                         "template_type": "generic",
                         "elements": [{
-                            "title": "Kitten",
-                            "subtitle": "Cute kitten picture",
+                            "title": "ရန်ကုန်",
+                            "subtitle": "ရန်ကုန်အကြောင်းအရာ",
                             "image_url": imageUrl ,
                             "buttons": [{
-                                "type": "web_url",
-                                "url": imageUrl,
-                                "title": "Show kitten"
-                                }, {
-                                "type": "postback",
-                                "title": "I like this",
-                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
-                            }]
+                              "type": "web_url",
+                              "url": "https://www.neptunemm.com/",
+                              "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
+                              },
+                              { 
+                                "type": "text",
+                                "title": "ရှင်းပြရန်"
+                                }]
                         }]
                     }
                 }
