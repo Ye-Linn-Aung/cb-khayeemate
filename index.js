@@ -81,7 +81,6 @@ function kittenMessage(recipientId, text) {
     var values = text.split();
     if (values[0] === 'ရန်ကုန်') {
             var imageUrl = "https://placekitten.com/";
-            
             message = {
                 "attachment": {
                     "type": "template",
@@ -100,6 +99,24 @@ function kittenMessage(recipientId, text) {
                     }
                 }
             };
+            message = {
+              "attachment": {
+                  "type": "template",
+                  "payload": {
+                      "template_type": "generic",
+                      "elements": [{
+                          "title": "ရန်ကုန်",
+                          "subtitle": "ရန်ကုန်အကြောင်းအရာ",
+                          "image_url": imageUrl ,
+                          "buttons": [{
+                            "type": "web_url",
+                            "url": "https://www.neptunemm.com/",
+                            "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
+                            }] 
+                      }]
+                  }
+              }
+          };
             sendMessage(recipientId, message);
             return true;  
     }   
