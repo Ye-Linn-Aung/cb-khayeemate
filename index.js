@@ -79,7 +79,7 @@ function kittenMessage(recipientId, text) {
     
     text = text || "";
     var values = text.split();
-    if (values[0] === 'ရန်') {
+    if (values[0] === 'ရန်ရန်ရန်') {
             var imageUrl = "https://placekitten.com/";
             message = {
                 "attachment": {
