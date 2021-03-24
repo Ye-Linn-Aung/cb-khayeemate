@@ -79,7 +79,7 @@ function kittenMessage(recipientId, text) {
     
     text = text || "";
     var values = text.split();
-    if (values[0] === 'ရန်ရန်ရန်') {
+    if (values[0] === 'ရန်ကုန်') {
             var imageUrl = "https://placekitten.com/";
             message = {
                 "attachment": {
@@ -89,7 +89,7 @@ function kittenMessage(recipientId, text) {
                         "elements": [{
                             "title": "ရန်ကုန်",
                             "subtitle": "ရန်ကုန်အကြောင်းအရာ",
-                            "image_url": imageUrl ,
+                            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Travel-Burma-yangon-shwedagon-pagoda.jpg/1280px-Travel-Burma-yangon-shwedagon-pagoda.jpg" ,
                             "buttons": [{
                               "type": "web_url",
                               "url": "https://www.neptunemm.com/",
