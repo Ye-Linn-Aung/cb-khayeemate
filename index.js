@@ -97,10 +97,8 @@ function kittenMessage(recipientId, text) {
                               }] 
                         }]
                     }
-                }
-            };
-            message = {
-              "attachment": {
+                },
+                "attachment": {
                   "type": "template",
                   "payload": {
                       "template_type": "generic",
@@ -116,7 +114,7 @@ function kittenMessage(recipientId, text) {
                       }]
                   }
               }
-          };
+            };
             sendMessage(recipientId, message);
             return true;  
     }   
