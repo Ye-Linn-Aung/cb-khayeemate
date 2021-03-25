@@ -26,7 +26,8 @@ app.get('/webhook', function (req, res) {
 
 // handler receiving messages
 app.post('/webhook', function (req, res) { 
-    var events = req.body.entry[0].messaging; 
+    var events = req.body.entry[0].messaging;
+    var webhook_event = req.body.entry[0].messaging; 
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message) {
@@ -48,10 +49,13 @@ app.post('/webhook', function (req, res) {
             if(!sendReplymm(event.sender.id, event.message.text)){
                sendMessage(event.sender.id); 
             }
+       }
+       if(webhook_event.postback){
+              handlePostbackMs(recipientId, webhook_event.postback);
        } 
         else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
-        }
+        } 
     } 
     res.sendStatus(200);
 });
@@ -73,6 +77,17 @@ function sendMessage(recipientId, message) {
             console.log('Error: ', response.body.error);
         }
     });
+}; 
+// handle postback message
+function handlePostbackMs(recipientId, received_postback){
+  var response;
+
+  var payload = received_postback.payload;
+  if(payload === 'အကြောင်းအရာ'){
+    response = { "text": "Oops, try sending another image." };
+    sendMessage(recipientId, response);
+            return true;
+  }
 };
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
