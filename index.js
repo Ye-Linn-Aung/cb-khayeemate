@@ -49,12 +49,15 @@ app.post('/webhook', function (req, res) {
             if(!sendReplymm(event.sender.id, event.message.text)){
                sendMessage(event.sender.id); 
             }
-       }
-       if(event.postback){
-              handlePostbackMs(recipientId, webhook_event.postback);
        } 
+       if(webhook_event.postback){
+         handlePostbackMs(recipientId, webhook_event.postback);
+       }
+      //  else if(webhook_event.postback){
+      //         console.log("Postback received: " + JSON.stringify(event.postback));
+      //  } 
         else if (event.postback) {
-            console.log("Postback received: " + JSON.stringify(event.postback));
+            console.log(webhook_event.postback); 
         } 
     } 
     res.sendStatus(200);
@@ -87,7 +90,7 @@ function handlePostbackMs(recipientId, received_postback){
     response = { "text": "Oops, try sending another image." };
     sendMessage(recipientId, response);
             return true;
-  }
+  } 
 };
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
