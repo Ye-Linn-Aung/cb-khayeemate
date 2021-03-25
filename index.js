@@ -52,7 +52,11 @@ app.post('/webhook', function (req, res) {
             }
        } 
         else if (event.postback) {
+          if(!handlePostbackMs(event.sender.id, event.postback.text)){
+            sendMessage(event.sender.id); 
+         }
           // console.log("Postback received: " + JSON.stringify(event.postback));
+
           
       }
     } 
