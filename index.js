@@ -19,7 +19,8 @@ app.get('/webhook', function (req, res) {
          var webhook_events = webhook_event[i];
          if(webhook_events.postback){
            if(!handlePostbackMs(webhook_events.sender.id, webhook_events.postback)){
-               sendMessage(webhook_events.sender.id);
+              //  sendMessage(webhook_events.sender.id);
+              console.log(JSON.stringify(webhook_events.postback));
            }
         }
     } 
@@ -59,14 +60,9 @@ app.post('/webhook', function (req, res) {
                sendMessage(event.sender.id); 
             }
        } 
-        // else if(webhook_event.postback){
-        //        console.log(webhook_event.postback);
-        // } 
-        //else if (event.postback) {
-            //  console.log("Postback received: " + JSON.stringify(event.postback));
-           // console.log(handlePostbackMs(recipientId,received_postback));
-            // console.log(webhook_event.postback); 
-       // } 
+        else if (event.postback) {
+          console.log("Postback received: " + JSON.stringify(event.postback));
+      }
     } 
     res.sendStatus(200);
 });
