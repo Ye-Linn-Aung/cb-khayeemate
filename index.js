@@ -12,7 +12,7 @@ app.listen(process.env.PORT || 3000, function(){
 
 
 // Server frontpage
-app.get('/', function (req, res) {
+app.get('/webhook', function (req, res) {
     res.send('Final Editing');
     var webhook_event = req.body.entry[0].messaging;
     for(j=0; j < webhook_event.length; i++){
