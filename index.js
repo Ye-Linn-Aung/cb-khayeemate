@@ -89,31 +89,15 @@ function kittenMessage(recipientId, text) {
                         "elements": [{
                             "title": "ရန်ကုန်",
                             "subtitle": "ရန်ကုန်အကြောင်းအရာ",
-                            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Travel-Burma-yangon-shwedagon-pagoda.jpg/1280px-Travel-Burma-yangon-shwedagon-pagoda.jpg" ,
+                            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Travel-Burma-yangon-shwedagon-pagoda.jpg/1280px-Travel-Burma-yangon-shwedagon-pagoda.jpg",
                             "buttons": [{
                               "type": "web_url",
                               "url": "https://www.neptunemm.com/",
                               "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
                               }] 
                         }]
-                    }
-                },
-                "attachment": {
-                  "type": "template",
-                  "payload": {
-                      "template_type": "generic",
-                      "elements": [{
-                          "title": "ရန်ကုန်",
-                          "subtitle": "ရန်ကုန်အကြောင်းအရာ",
-                          "image_url": imageUrl ,
-                          "buttons": [{
-                            "type": "web_url",
-                            "url": "https://www.neptunemm.com/",
-                            "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
-                            }] 
-                      }]
-                  }
-              }
+                    } 
+                }
             };
             sendMessage(recipientId, message);
             return true;  
