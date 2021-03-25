@@ -94,7 +94,13 @@ function kittenMessage(recipientId, text) {
                               "type": "web_url",
                               "url": "https://www.neptunemm.com/",
                               "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
-                              }] 
+                              },
+                              {
+                                "type": "postback",
+                                "title": "Show Info",
+                                "payload": "showinfo",
+                              } 
+                            ] 
                         }]
                     } 
                 }
