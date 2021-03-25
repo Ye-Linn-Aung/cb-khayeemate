@@ -50,7 +50,7 @@ app.post('/webhook', function (req, res) {
                sendMessage(event.sender.id); 
             }
        }
-       if(webhook_event.postback){
+       if(event.postback){
               handlePostbackMs(recipientId, webhook_event.postback);
        } 
         else if (event.postback) {
