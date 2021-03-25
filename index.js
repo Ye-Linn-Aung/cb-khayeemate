@@ -60,10 +60,10 @@ app.post('/webhook', function (req, res) {
         // else if(webhook_event.postback){
         //        console.log(webhook_event.postback);
         // } 
-        else if (event.postback) {
-            // console.log("Postback received: " + JSON.stringify(event.postback));
-            console.log(webhook_event.postback); 
-        } 
+//         else if (event.postback) {
+//             // console.log("Postback received: " + JSON.stringify(event.postback));
+//             console.log(webhook_event.postback); 
+//         } 
     } 
     res.sendStatus(200);
 });
