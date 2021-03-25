@@ -12,20 +12,33 @@ app.listen(process.env.PORT || 3000, function(){
 
 
 // Server frontpage
-app.get('/webhook', function (req, res) {
-    res.send('Final Editing');
-    var webhook_event = req.body.entry[0].messaging;
-    for(j=0; j < webhook_event.length; i++){
-         var webhook_events = webhook_event[i];
-         if(webhook_events.postback){
-           if(!handlePostbackMs(webhook_events.sender.id, webhook_events.postback)){
-              //  sendMessage(webhook_events.sender.id);
-              console.log(JSON.stringify(webhook_events.postback));
-           }
-        }
-    } 
-});
+// app.get('/webhook', function (req, res) {
+//     res.send('Final Editing');
+    
+// }); 
+app.get('/webhook', (req, res) => {
 
+  // Your verify token. Should be a random string.
+  var VERIFY_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+  
+  // Parse the query params
+  var mode = req.query['hub.mode'];
+  var token = req.query['hub.verify_token'];
+  var challenge = req.query['hub.challenge'];
+
+  // Checks if a token and mode is in the query string of the request
+  if (mode && token) {
+      // Checks the mode and token sent is correct
+      if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+          // Responds with the challenge token from the request
+          console.log('WEBHOOK_VERIFIED');
+          res.status(200).send(challenge);
+      } else {
+          // Responds with '403 Forbidden' if verify tokens do not match
+          res.sendStatus(403);
+      }
+  }
+});
 // Facebook Webhook 
 app.get('/webhook', function (req, res) {
     if (req.query['hub.verify_token'] === 'testbot_verify_token') {
@@ -61,7 +74,8 @@ app.post('/webhook', function (req, res) {
             }
        } 
         else if (event.postback) {
-          console.log("Postback received: " + JSON.stringify(event.postback));
+          // console.log("Postback received: " + JSON.stringify(event.postback));
+          
       }
     } 
     res.sendStatus(200);
@@ -86,13 +100,13 @@ function sendMessage(recipientId, message) {
     });
 }; 
 // handle postback message
-function handlePostbackMs(recipientId, received_postback){
-  var response;
+function handlePostbackMs(recipientId, text){
+  var message;
 
-  var payload = received_postback.payload;
+  var payload = text.payload;
   if(payload === 'အကြောင်းအရာ'){
-    response = { "text": "Oops, try sending another image." };
-    sendMessage(recipientId, response);
+    message = { "text": "Oops, try sending another image." };
+    sendMessage(recipientId, message);
             return true;
   } 
 };
