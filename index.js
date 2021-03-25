@@ -49,11 +49,6 @@ app.post('/webhook', function (req, res) {
                sendMessage(event.sender.id); 
             }
        } 
-       if(event.postback){
-        if(!handlePostBack(event.sender.id, event.message.text)){
-          sendMessage(event.sender.id); 
-       }
-       }
         else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
         }
@@ -115,20 +110,7 @@ function kittenMessage(recipientId, text) {
     }   
     return false;  
 };   
-function handlePostBack(recipientId, text){
-     let response;
-     let payload;
 
-    //  Get the payload for the postback
-    let payload = text.payload; 
-
-    // Set the response based on the postback payload 
-    if(payload === "အကြောင်းအရာ"){
-           response = {"text": "ရန်ကုန်သည်ခွေးလက်အောက်တွင်ရှိနေသည်။ထို့ကြောင့်လာလည်ရန်မသင့်တော်ပါ။"}
-    } 
-    sendMessage(recipientId, response);
-            return true;
-}
 function sendButtonMessage(recipientId, text) { 
   text = text || "";
   var values = text.split();
