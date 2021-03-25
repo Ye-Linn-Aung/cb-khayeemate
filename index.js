@@ -9,11 +9,19 @@ app.use(bodyParser.json());
 app.listen(process.env.PORT || 3000, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
     });
+
+
 // Server frontpage
-app.get('/', function (req, res) {
+app.get('/webhook', function (req, res) {
     res.send('Final Editing');
+    var webhook_event = req.body.entry[0].messaging;
+    for(j=0; j < webhook_event.length; i++){
+         var webhook_events = webhook_event[i];
+         if(webhook_events.postback){
+          handlePostbackMs(recipientId, webhook_event.postback);
+        }
+    } 
 });
-	
 
 // Facebook Webhook 
 app.get('/webhook', function (req, res) {
@@ -26,8 +34,7 @@ app.get('/webhook', function (req, res) {
 
 // handler receiving messages
 app.post('/webhook', function (req, res) { 
-    var events = req.body.entry[0].messaging;
-    var webhook_event = req.body.entry[0].messaging; 
+    var events = req.body.entry[0].messaging; 
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message) {
@@ -50,13 +57,11 @@ app.post('/webhook', function (req, res) {
                sendMessage(event.sender.id); 
             }
        } 
-       if(webhook_event.postback){
-         handlePostbackMs(recipientId, webhook_event.postback);
-       }
-      //  else if(webhook_event.postback){
-      //         console.log("Postback received: " + JSON.stringify(event.postback));
-      //  } 
+        // else if(webhook_event.postback){
+        //        console.log(webhook_event.postback);
+        // } 
         else if (event.postback) {
+            // console.log("Postback received: " + JSON.stringify(event.postback));
             console.log(webhook_event.postback); 
         } 
     } 
