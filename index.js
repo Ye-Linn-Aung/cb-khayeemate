@@ -12,15 +12,17 @@ app.listen(process.env.PORT || 3000, function(){
 
 
 // Server frontpage
-app.get('/', function (req, res) {
+app.get('/webhook', function (req, res) {
     res.send('Final Editing');
-    // var webhook_event = req.body.entry[0].messaging;
-    // for(j=0; j < webhook_event.length; i++){
-    //      var webhook_events = webhook_event[i];
-    //      if(webhook_events.postback){
-    //       handlePostbackMs(recipientId, webhook_event.postback);
-    //     }
-    // } 
+    var webhook_event = req.body.entry[0].messaging;
+    for(j=0; j < webhook_event.length; i++){
+         var webhook_events = webhook_event[i];
+         if(webhook_events.postback){
+           if(!handlePostbackMs(webhook_events.sender.id, webhook_events.postback)){
+               console.log(webhook_events.sender.id);
+           }
+        }
+    } 
 });
 
 // Facebook Webhook 
@@ -60,11 +62,11 @@ app.post('/webhook', function (req, res) {
         // else if(webhook_event.postback){
         //        console.log(webhook_event.postback);
         // } 
-        else if (event.postback) {
+        //else if (event.postback) {
             //  console.log("Postback received: " + JSON.stringify(event.postback));
-            console.log(handlePostbackMs(recipientId,received_postback));
+           // console.log(handlePostbackMs(recipientId,received_postback));
             // console.log(webhook_event.postback); 
-        } 
+       // } 
     } 
     res.sendStatus(200);
 });
