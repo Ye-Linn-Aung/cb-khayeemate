@@ -12,7 +12,7 @@ app.listen(process.env.PORT || 3000, function(){
 
 
 // Server frontpage
-app.get('/webhook', function (req, res) {
+app.get('/', function (req, res) {
     res.send('Final Editing');
     var webhook_event = req.body.entry[0].messaging;
     for(j=0; j < webhook_event.length; i++){
@@ -74,6 +74,7 @@ function sendMessage(recipientId, message) {
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
         method: 'POST',
+        method: 'GET',
         json: {
             recipient: {id: recipientId},
             message: message,
