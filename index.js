@@ -19,7 +19,7 @@ app.get('/webhook', function (req, res) {
          var webhook_events = webhook_event[i];
          if(webhook_events.postback){
            if(!handlePostbackMs(webhook_events.sender.id, webhook_events.postback)){
-               console.log(webhook_events.sender.id);
+               sendMessage(webhook_events.sender.id);
            }
         }
     } 
