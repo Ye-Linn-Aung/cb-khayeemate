@@ -12,33 +12,11 @@ app.listen(process.env.PORT || 3000, function(){
 
 
 // Server frontpage
-// app.get('/webhook', function (req, res) {
-//     res.send('Final Editing');
+app.get('/webhook', function (req, res) {
+    res.send('Final Editing');
     
-// }); 
-app.get('/webhook', (req, res) => {
+}); 
 
-  // Your verify token. Should be a random string.
-  var VERIFY_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-  
-  // Parse the query params
-  var mode = req.query['hub.mode'];
-  var token = req.query['hub.verify_token'];
-  var challenge = req.query['hub.challenge'];
-
-  // Checks if a token and mode is in the query string of the request
-  if (mode && token) {
-      // Checks the mode and token sent is correct
-      if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-          // Responds with the challenge token from the request
-          console.log('WEBHOOK_VERIFIED');
-          res.status(200).send(challenge);
-      } else {
-          // Responds with '403 Forbidden' if verify tokens do not match
-          res.sendStatus(403);
-      }
-  }
-});
 // Facebook Webhook 
 app.get('/webhook', function (req, res) {
     if (req.query['hub.verify_token'] === 'testbot_verify_token') {
