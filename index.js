@@ -28,8 +28,10 @@ app.get('/webhook', function (req, res) {
 // handler receiving messages
 app.post('/webhook', function (req, res) { 
     var events = req.body.entry[0].messaging; 
+    var post_pys = req.body.entry[0].messaging_postbacks;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
+        var post_py = post_pys[i];
         if (event.message) {
             if (!kittenMessage(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id);
@@ -50,9 +52,9 @@ app.post('/webhook', function (req, res) {
                sendMessage(event.sender.id); 
             }
        } 
-        else if (event.postback) {
-          if(!receivedPostback(event.sender.id, event.message.text)){
-            sendMessage(event.sender.id); 
+        else if (post_py.postback) {
+          if(!receivedPostback(post_py.sender.id, post_py.postback.postback_payload)){
+            sendMessage(post_py.sender.id); 
          }   
           // console.log("Postback received: " + JSON.stringify(event.postback));
           // receivedPostback(payload_event);
