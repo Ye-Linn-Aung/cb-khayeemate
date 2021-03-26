@@ -51,8 +51,8 @@ app.post('/webhook', function (req, res) {
             }
        } 
         else if (event.postback) {
-           receivedPostback(event.sender.id, event.postback.payload_event);
-           sendMessage(event.sender.id);
+           receivedPostback(event.postback.payload_event);
+          //  sendMessage(event.sender.id);
            
           // console.log("Postback received: " + JSON.stringify(event.postback));
           // receivedPostback(payload_event);
@@ -83,13 +83,11 @@ function sendMessage(recipientId, message) {
 function receivedPostback(recipientId, payload_event){
 
   var payload = payload_event.postback.payload; 
-  switch(payload)
-  {
-    case 'အကြောင်းအရာ':
-      var message = "ဟုတ်ကဲ့ ရန်ကုန်မြို့ကကြိုဆိုပါတယ်။";
-      sendMessage(recipientId, message);
-      break;
-  }
+  if(payload === 'အကြောင်းအရာ'){
+    message = { "text": "Oops, try sending another image." };
+     sendMessage(recipientId, message);
+     return true;
+  } 
 };
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
