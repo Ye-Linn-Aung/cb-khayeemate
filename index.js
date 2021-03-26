@@ -51,7 +51,7 @@ app.post('/webhook', function (req, res) {
             }
        } 
         else if (event.postback) {
-          receivedPostback(messagingEvent);
+          receivedPostback(event);
          
           // console.log("Postback received: " + JSON.stringify(event.postback));
           // receivedPostback(payload_event);
@@ -90,21 +90,25 @@ function receivedPostback(event) {
 
   console.log("Received postback for user %d and page %d with payload '%s' " + 
     "at %d", senderID, recipientID, payload, timeOfPostback);
-
+    if(payload === 'အကြောင်းအရာ'){
+      message = { "text": "Oops, try sending another image." };
+       sendMessage(recipientId, message);
+       return true;
+    }; 
   // When a postback is called, we'll send a message back to the sender to 
   // let them know it was successful
   sendTextMessage(senderID, "Postback called");
 };
 // handle postback message
-function receivedPostback(recipientId, payload_event){
+// function receivedPostback(recipientId, payload_event){
 
-  var payload = payload_event.postback.payload; 
-  if(payload === 'အကြောင်းအရာ'){
-    message = { "text": "Oops, try sending another image." };
-     sendMessage(recipientId, message);
-     return true;
-  } 
-};
+//   var payload = payload_event.postback.payload; 
+//   if(payload === 'အကြောင်းအရာ'){
+//     message = { "text": "Oops, try sending another image." };
+//      sendMessage(recipientId, message);
+//      return true;
+//   } 
+// };
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
     
