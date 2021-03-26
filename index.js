@@ -51,7 +51,7 @@ app.post('/webhook', function (req, res) {
             }
        } 
         else if (event.postback) {
-           if(!receivedPostback(event.sender.id, event.postback.payload_event)){
+           if(receivedPostback(event.sender.id, event.postback.payload_event)){
                   sendMessage(event.sender.id);
            }
           // console.log("Postback received: " + JSON.stringify(event.postback));
