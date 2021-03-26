@@ -97,7 +97,7 @@ function receivedPostback(event) {
     }; 
   // When a postback is called, we'll send a message back to the sender to 
   // let them know it was successful
-  sendTextMessage(senderID, "Postback called");
+  sendTextMessage(senderID, payload);
 };
 // handle postback message
 // function receivedPostback(recipientId, payload_event){
@@ -141,7 +141,7 @@ function kittenMessage(recipientId, text) {
                 }
             };
             sendMessage(recipientId, message);
-            sendTextMessage(senderID, "Postback called");
+            sendTextMessage(senderID, payload);
             return true;  
     }   
     return false;  
