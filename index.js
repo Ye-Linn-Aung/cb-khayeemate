@@ -52,8 +52,11 @@ app.post('/webhook', function (req, res) {
             }
        } 
         else if (event.postback) {
+           if(!receivedPostback(event.sender.id, event.postback.payload_event)){
+                  sendMessage(event.sender.id);
+           }
           // console.log("Postback received: " + JSON.stringify(event.postback));
-          receivedPostback(payload_event);
+          // receivedPostback(payload_event);
       }
     } 
     res.sendStatus(200);
@@ -78,16 +81,14 @@ function sendMessage(recipientId, message) {
     });
 }; 
 // handle postback message
-function receivedPostback(payload_event){
-  var senderID = payload_event.sender.id;
-  var recipientID = payload_event.recipient.id;
-  var timeOfMessage = payload_event.timestamp;
+function receivedPostback(recipientId, payload_event){
+
   var payload = payload_event.postback.payload; 
   switch(payload)
   {
     case 'အကြောင်းအရာ':
-      var msg = "ဟုတ်ကဲ့ ရန်ကုန်မြို့ကကြိုဆိုပါတယ်။";
-      sendMessage(senderID,msg);
+      var message = "ဟုတ်ကဲ့ ရန်ကုန်မြို့ကကြိုဆိုပါတယ်။";
+      sendMessage(recipientId, message);
       break;
   }
 };
