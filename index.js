@@ -28,10 +28,8 @@ app.get('/webhook', function (req, res) {
 // handler receiving messages
 app.post('/webhook', function (req, res) { 
     var events = req.body.entry[0].messaging; 
-    var post_pys = req.body.entry[0].messaging_postbacks;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
-        var post_py = post_pys[i];
         if (event.message) {
             if (!kittenMessage(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id);
@@ -52,10 +50,9 @@ app.post('/webhook', function (req, res) {
                sendMessage(event.sender.id); 
             }
        } 
-        else if (post_py.postback) {
-          if(!receivedPostback(post_py.sender.id, post_py.postback.postback_payload)){
-            sendMessage(post_py.sender.id); 
-         }   
+        else if (event.postback) {
+          receivedPostback(messagingEvent);
+         
           // console.log("Postback received: " + JSON.stringify(event.postback));
           // receivedPostback(payload_event);
       }
@@ -81,6 +78,23 @@ function sendMessage(recipientId, message) {
         }
     });
 }; 
+// handle payload by Get
+function receivedPostback(event) {
+  var senderID = event.sender.id;
+  var recipientID = event.recipient.id;
+  var timeOfPostback = event.timestamp;
+
+  // The 'payload' param is a developer-defined field which is set in a postback 
+  // button for Structured Messages. 
+  var payload = event.postback.payload;
+
+  console.log("Received postback for user %d and page %d with payload '%s' " + 
+    "at %d", senderID, recipientID, payload, timeOfPostback);
+
+  // When a postback is called, we'll send a message back to the sender to 
+  // let them know it was successful
+  sendTextMessage(senderID, "Postback called");
+};
 // handle postback message
 function receivedPostback(recipientId, payload_event){
 
