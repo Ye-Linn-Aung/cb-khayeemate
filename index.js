@@ -141,6 +141,7 @@ function kittenMessage(recipientId, text) {
                 }
             };
             sendMessage(recipientId, message);
+            sendTextMessage(senderID, "Postback called");
             return true;  
     }   
     return false;  
