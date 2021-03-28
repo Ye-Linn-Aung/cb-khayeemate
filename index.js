@@ -64,6 +64,7 @@ app.post('/webhook', function (req, res) {
        } 
         else if (event.postback) { 
             receivedPostback(event.sender.id, event.postback.payload_event)
+            sendMessage(event.sender.id);
            }
            
           // receivedPostback(event);
@@ -95,7 +96,7 @@ function sendMessage(recipientId, message) {
 function receivedPostback(recipientId, payload_event){
 
   var payload = payload_event.postback.payload; 
-  if(payload === 'အကြောင်းအရာ'){
+  if(payload === "အကြောင်းအရာ"){
     message = { "text": "Oops, try sending another image." };
      sendMessage(recipientId, message);
      return true;
