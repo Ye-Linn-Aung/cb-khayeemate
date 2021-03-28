@@ -24,6 +24,18 @@ app.get('/webhook', function (req, res) {
         res.send('Invalid verify token');
     }
 });  
+app.get('/webhook', function (req, res) { 
+  var wbevents = req.body.entry[0].messaging;
+  for(j=0; i < wbevents.length; j++){
+         var wbevent = wbevents[i];
+         if(wbevent.postback){
+          if(!receivedPostback(wbevent.sender.id, wbevent.message.text)){
+            sendMessage(wbevent.sender.id); 
+         }
+         }
+  }
+  res.sendStatus(200);
+});
 
 // handler receiving messages
 app.post('/webhook', function (req, res) { 
@@ -51,9 +63,8 @@ app.post('/webhook', function (req, res) {
             }
        } 
         else if (event.postback) {
-          receivedPostback(event);
-         
-          // console.log("Postback received: " + JSON.stringify(event.postback));
+          // receivedPostback(event);
+          console.log("Postback received: " + JSON.stringify(event.postback));
           // receivedPostback(payload_event);
       }
     } 
@@ -77,41 +88,33 @@ function sendMessage(recipientId, message) {
             console.log('Error: ', response.body.error);
         }
     });
+    request({
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+      method: 'GET',
+      json: {
+          recipient: {id: recipientId},
+          message: message,
+      }
+  }, function(error, response, body) {
+      if (error) {
+          console.log('Error sending message: ', error);
+      } else if (response.body.error) {
+          console.log('Error: ', response.body.error);
+      }
+  });
 }; 
-// handle payload by Get
-function receivedPostback(event) {
-  var senderID = event.sender.id;
-  var recipientID = event.recipient.id;
-  var timeOfPostback = event.timestamp;
+//handle postback message
+function receivedPostback(recipientId, payload_event){
 
-  // The 'payload' param is a developer-defined field which is set in a postback 
-  // button for Structured Messages. 
-  var payload = event.postback.payload;
-
-  console.log("Received postback for user %d and page %d with payload '%s' " + 
-    "at %d", senderID, recipientID, payload, timeOfPostback);
-    if(payload === 'အကြောင်းအရာ'){
-      message = { "text": "Oops, try sending another image." };
-      sendMessage(recipientId, message);
-      
-       return true;
-    }; 
-    sendMessage(senderID, payload);
-  // When a postback is called, we'll send a message back to the sender to 
-  // let them know it was successful
+  var payload = payload_event.postback.payload; 
+  if(payload === 'အကြောင်းအရာ'){
+    message = { "text": "Oops, try sending another image." };
+     sendMessage(recipientId, message);
+     return true;
+  }  
 };
 
-
-// handle postback message
-// function receivedPostback(recipientId, payload_event){
-
-//   var payload = payload_event.postback.payload; 
-//   if(payload === 'အကြောင်းအရာ'){
-//     message = { "text": "Oops, try sending another image." };
-//      sendMessage(recipientId, message);
-//      return true;
-//   } 
-// };
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
     
