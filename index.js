@@ -63,14 +63,12 @@ app.post('/webhook', function (req, res) {
             }
        } 
         else if (event.postback) { 
-            if(!receivedPostback(event.sender.id, event.message.text)){
-              sendMessage(event.sender.id); 
+            receivedPostback(event.sender.id, event.postback.payload_event)
            }
            
           // receivedPostback(event);
           // console.log("Postback received: " + JSON.stringify(event.postback));
           // receivedPostback(payload_event);
-      }
     } 
     res.sendStatus(200);
 });
@@ -92,21 +90,6 @@ function sendMessage(recipientId, message) {
             console.log('Error: ', response.body.error);
         }
     });
-    request({
-      url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-      method: 'GET',
-      json: {
-          recipient: {id: recipientId},
-          message: message,
-      }
-  }, function(error, response, body) {
-      if (error) {
-          console.log('Error sending message: ', error);
-      } else if (response.body.error) {
-          console.log('Error: ', response.body.error);
-      }
-  });
 }; 
 //handle postback message
 function receivedPostback(recipientId, payload_event){
