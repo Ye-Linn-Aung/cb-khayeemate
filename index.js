@@ -31,7 +31,7 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message) {
-            if (!kittenMessage(event.sender.id, event.message.text)) {
+            if (!carouselMessage(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id);
             }
         }
@@ -95,11 +95,14 @@ function receivedPostback(recipientId, payload_event){
     message = { "text": "ကျွန်တော်သည်မန္တလေးဖြစ်သည်။" };
      sendMessage(recipientId, message);
      return true;
+  } 
+  if(payload === "TO_BACK"){
+     message = {"text": "နောက်သို့"}
   }  
 };
 
 // send rich message with kitten
-function kittenMessage(recipientId, text) {
+function carouselMessage(recipientId, text) {
     
     text = text || "";
     var values = text.split();
@@ -122,6 +125,11 @@ function kittenMessage(recipientId, text) {
                                 "type": "postback",
                                 "title": "အကြောင်းအရာကြည့်ရန်",
                                 "payload": "YGN_MM",
+                              },
+                              {
+                                "type": "postback",
+                                "title": "နောက်သို့",
+                                "payload": "TO_BACK",
                               } 
                             ] 
                         }]
@@ -138,9 +146,9 @@ function kittenMessage(recipientId, text) {
               "payload": {
                   "template_type": "generic",
                   "elements": [{
-                      "title": "ရန်ကုန်",
-                      "subtitle": "ရန်ကုန်အကြောင်းအရာ",
-                      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Travel-Burma-yangon-shwedagon-pagoda.jpg/1280px-Travel-Burma-yangon-shwedagon-pagoda.jpg",
+                      "title": "မန္တလေး",
+                      "subtitle": "မန္တလေးအကြောင်းအရာ",
+                      "image_url": "https://www.shweyemonhotelmandalay.com/wp-content/uploads/2017/11/attraction-mandalay-750x500.jpg",
                       "buttons": [{
                         "type": "web_url",
                         "url": "https://www.neptunemm.com/",
@@ -150,6 +158,11 @@ function kittenMessage(recipientId, text) {
                           "type": "postback",
                           "title": "အကြောင်းအရာကြည့်ရန်",
                           "payload": "MDY_MM",
+                        },
+                        {
+                          "type": "postback",
+                          "title": "နောက်သို့",
+                          "payload": "TO_BACK",
                         } 
                       ] 
                   }]
@@ -219,7 +232,7 @@ function sendButtonMessage(recipientId, text) {
   function sendReplymm(recipientId, text) { 
     text = text || "";
     var values = text.split(); 
-    if (values[0] === 'Myanmar') {
+    if (values[0] === 'Myanmar' || values[0] === 'နောက်သို့') {
             message = {
                 text: "Choose Your City",
                 quick_replies: [
