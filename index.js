@@ -97,7 +97,7 @@ function receivedPostback(recipientId, payload_event){
      return true;
   } 
   if(payload === "TO_BACK"){
-     message = {"text": "နောက်သို့"};
+     message = sendReplymm(recipientId, 'နောက်သို့');
      sendMessage(recipientId, message);
      return true;
   }  
