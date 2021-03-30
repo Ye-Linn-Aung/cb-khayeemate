@@ -96,6 +96,7 @@ function receivedPostback(recipientId, payload_event){
   if(payload === "PLE_ASE"){
     message = { "text": "Oops, try sending another image." };
      sendMessage(recipientId, message);
+     return true;
   }  
 };
 
@@ -111,6 +112,7 @@ function kittenMessage(recipientId, text) {
                     "type": "template",
                     "payload": {
                         "template_type": "generic",
+                        "type": "text",
                         "elements": [{
                             "title": "ရန်ကုန်",
                             "subtitle": "ရန်ကုန်အကြောင်းအရာ",
