@@ -86,8 +86,13 @@ function sendMessage(recipientId, message) {
 function receivedPostback(recipientId, payload_event){
   var message;
   var payload = payload_event.payload; 
-  if(payload === "PLE_ASE"){
-    message = { "text": "Oops, try sending another image." };
+  if(payload === "YGN_MM"){
+    message = { "text": "ကျွန်တော်သည်ရန်ကုန်ဖြစ်သည်။" };
+     sendMessage(recipientId, message);
+     return true;
+  }
+  if(payload === "MDY_MM"){
+    message = { "text": "ကျွန်တော်သည်မန္တလေးဖြစ်သည်။" };
      sendMessage(recipientId, message);
      return true;
   }  
@@ -99,7 +104,6 @@ function kittenMessage(recipientId, text) {
     text = text || "";
     var values = text.split();
     if (values[0] === 'ရန်ကုန်') {
-            var imageUrl = "https://placekitten.com/";
             message = {
                 "attachment": {
                     "type": "template",
@@ -117,7 +121,7 @@ function kittenMessage(recipientId, text) {
                               {
                                 "type": "postback",
                                 "title": "အကြောင်းအရာကြည့်ရန်",
-                                "payload": "PLE_ASE",
+                                "payload": "YGN_MM",
                               } 
                             ] 
                         }]
@@ -126,7 +130,35 @@ function kittenMessage(recipientId, text) {
             };
             sendMessage(recipientId, message);
             return true;  
-    }   
+    }
+    if (values[0] === 'မန္တလေး') {
+      message = {
+          "attachment": {
+              "type": "template",
+              "payload": {
+                  "template_type": "generic",
+                  "elements": [{
+                      "title": "ရန်ကုန်",
+                      "subtitle": "ရန်ကုန်အကြောင်းအရာ",
+                      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Travel-Burma-yangon-shwedagon-pagoda.jpg/1280px-Travel-Burma-yangon-shwedagon-pagoda.jpg",
+                      "buttons": [{
+                        "type": "web_url",
+                        "url": "https://www.neptunemm.com/",
+                        "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
+                        },
+                        {
+                          "type": "postback",
+                          "title": "အကြောင်းအရာကြည့်ရန်",
+                          "payload": "MDY_MM",
+                        } 
+                      ] 
+                  }]
+              } 
+          }
+      };
+      sendMessage(recipientId, message);
+      return true;  
+}   
     return false;  
 };   
 
