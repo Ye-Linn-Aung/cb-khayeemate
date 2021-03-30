@@ -84,7 +84,7 @@ function sendMessage(recipientId, message) {
 function receivedPostback(recipientId, payload_event){
   var message;
   var payload = payload_event.postback.payload; 
-  if(payload === "please"){
+  if(payload === "PLE_ASE"){
     message = { "text": "Oops, try sending another image." };
      sendMessage(recipientId, message);
      return true;
@@ -115,7 +115,7 @@ function kittenMessage(recipientId, text) {
                               {
                                 "type": "postback",
                                 "title": "အကြောင်းအရာကြည့်ရန်",
-                                "payload": "please",
+                                "payload": "PLE_ASE",
                               } 
                             ] 
                         }]
