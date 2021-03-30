@@ -105,7 +105,6 @@ function kittenMessage(recipientId, text) {
                     "type": "template",
                     "payload": {
                         "template_type": "generic",
-                        "type": "text",
                         "elements": [{
                             "title": "ရန်ကုန်",
                             "subtitle": "ရန်ကုန်အကြောင်းအရာ",
