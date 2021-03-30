@@ -24,18 +24,6 @@ app.get('/webhook', function (req, res) {
         res.send('Invalid verify token');
     }
 });  
-app.get('/webhook', function (req, res) { 
-  var wbevents = req.body.entry[0].messaging;
-  for(j=0; i < wbevents.length; j++){
-         var wbevent = wbevents[i];
-         if(wbevent.postback){
-          if(!receivedPostback(wbevent.sender.id, wbevent.message.text)){
-            sendMessage(wbevent.sender.id); 
-         }
-         }
-  }
-  res.sendStatus(200);
-});
 
 // handler receiving messages
 app.post('/webhook', function (req, res) { 
@@ -63,8 +51,7 @@ app.post('/webhook', function (req, res) {
             }
        } 
         else if (event.postback) { 
-            receivedPostback(event.sender.id, event.postback.payload_event)
-            sendMessage(event.sender.id);
+            receivedPostback(event.sender.id, event.postback)
            }
            
           // receivedPostback(event);
@@ -73,6 +60,7 @@ app.post('/webhook', function (req, res) {
     } 
     res.sendStatus(200);
 });
+
 
 // generic function sending messages
 function sendMessage(recipientId, message) {
@@ -94,9 +82,9 @@ function sendMessage(recipientId, message) {
 }; 
 //handle postback message
 function receivedPostback(recipientId, payload_event){
-
+  var message;
   var payload = payload_event.postback.payload; 
-  if(payload === "အကြောင်းအရာ"){
+  if(payload === "please"){
     message = { "text": "Oops, try sending another image." };
      sendMessage(recipientId, message);
      return true;
@@ -127,7 +115,7 @@ function kittenMessage(recipientId, text) {
                               {
                                 "type": "postback",
                                 "title": "အကြောင်းအရာကြည့်ရန်",
-                                "payload": "အကြောင်းအရာ",
+                                "payload": "please",
                               } 
                             ] 
                         }]
