@@ -83,7 +83,7 @@ function sendMessage(recipientId, message) {
 //handle postback message
 function receivedPostback(recipientId, payload_event){
   var message;
-  var payload = payload_event.postback.payload; 
+  var payload = payload_event.payload; 
   if(payload === "PLE_ASE"){
     message = { "text": "Oops, try sending another image." };
      sendMessage(recipientId, message);
