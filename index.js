@@ -87,7 +87,6 @@ function receivedPostback(recipientId, payload_event){
   if(payload === "PLE_ASE"){
     message = { "text": "Oops, try sending another image." };
      sendMessage(recipientId, message);
-     return true;
   }  
 };
 
