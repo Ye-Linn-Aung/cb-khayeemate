@@ -86,12 +86,12 @@ function sendMessage(recipientId, message) {
 function receivedPostback(recipientId, payload_event){
   var message;
   var payload = payload_event.payload; 
-  if(payload === "YGN_MM"){
+  if(payload === "YGN_MMAD"){
     message = { "text": "ကျွန်တော်သည်ရန်ကုန်ဖြစ်သည်။" };
      sendMessage(recipientId, message);
      return true;
   }
-  if(payload === "MDY_MM"){
+  if(payload === "MDY_MMAD"){
     message = { "text": "ကျွန်တော်သည်မန္တလေးဖြစ်သည်။" };
      sendMessage(recipientId, message);
      return true;
@@ -108,7 +108,7 @@ function carouselMessage(recipientId, text) {
     
     text = text || "";
     var values = text.split();
-    if (values[0] === 'ရန်ကုန်') {
+    if (values[0] === 'စွန့်စားမှုခရီး') {
             message = {
                 "attachment": {
                     "type": "template",
@@ -126,7 +126,7 @@ function carouselMessage(recipientId, text) {
                               {
                                 "type": "postback",
                                 "title": "အကြောင်းအရာကြည့်ရန်",
-                                "payload": "YGN_MM",
+                                "payload": "YGN_MMAD",
                               },
                               {
                                 "type": "postback",
@@ -141,7 +141,7 @@ function carouselMessage(recipientId, text) {
             sendMessage(recipientId, message);
             return true;  
     }
-    if (values[0] === 'မန္တလေး') {
+    if (values[0] === 'ခရီးတို') {
       message = {
           "attachment": {
               "type": "template",
@@ -159,7 +159,7 @@ function carouselMessage(recipientId, text) {
                         {
                           "type": "postback",
                           "title": "အကြောင်းအရာကြည့်ရန်",
-                          "payload": "MDY_MM",
+                          "payload": "MDY_MMAD",
                         },
                         {
                           "type": "postback",
@@ -240,28 +240,23 @@ function sendButtonMessage(recipientId, text) {
                 quick_replies: [
                   { 
                     "content_type":"text",
-                    "title":"ရန်ကုန်",
+                    "title":"စွန့်စားမှုခရီး",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
                   },
                   {
                     "content_type":"text",
-                    "title":"မန္တလေး",
+                    "title":"ခရီးတို",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
                   },
                   {
                     "content_type":"text",
-                    "title":"တောင်ကြီး",
+                    "title":"အပန်းဖြေခရီး",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
                   },
                   {
                     "content_type":"text",
-                    "title":"နေပြည်တော်",
+                    "title":"မသိသောခရီး",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
-                  },
-                  {
-                    "content_type":"text",
-                    "title":"မော်လမြိုင်",
-                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
                   }
                 ]
               }
@@ -274,27 +269,22 @@ function sendButtonMessage(recipientId, text) {
           quick_replies: [
             { 
               "content_type":"text",
-              "title":"Yangon",
+              "title":"Adventure",
               "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
             },
             {
               "content_type":"text",
-              "title":"Mandalay",
+              "title":"Short Trip",
               "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
             },
             {
               "content_type":"text",
-              "title":"Taunggyi",
+              "title":"Relax",
               "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
             }, 
             {
               "content_type":"text",
-              "title":"Naypyidaw",
-              "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
-            },
-            {
-              "content_type":"text",
-              "title":"Mawlamyine",
+              "title":"Unknown",
               "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
             }
           ]
