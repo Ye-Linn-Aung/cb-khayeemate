@@ -114,7 +114,8 @@ function carouselMessage(recipientId, text) {
                     "type": "template",
                     "payload": {
                         "template_type": "generic",
-                        "elements": [{
+                        "elements": [
+                          {
                             "title": "ရန်ကုန်",
                             "subtitle": "ရန်ကုန်အကြောင်းအရာ",
                             "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Travel-Burma-yangon-shwedagon-pagoda.jpg/1280px-Travel-Burma-yangon-shwedagon-pagoda.jpg",
@@ -134,17 +135,11 @@ function carouselMessage(recipientId, text) {
                                 "payload": "TO_BACK",
                               } 
                             ] 
-                        }]
-                    } 
-                },
-                "attachment": {
-                  "type": "template",
-                  "payload": {
-                      "template_type": "generic",
-                      "elements": [{
-                          "title": "ရန်ကုန်",
-                          "subtitle": "ရန်ကုန်အကြောင်းအရာ",
-                          "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Travel-Burma-yangon-shwedagon-pagoda.jpg/1280px-Travel-Burma-yangon-shwedagon-pagoda.jpg",
+                        },
+                        {
+                          "title": "မန္တလေး",
+                          "subtitle": "မန္တလေးအကြောင်းအရာ",
+                          "image_url": "https://www.shweyemonhotelmandalay.com/wp-content/uploads/2017/11/attraction-mandalay-750x500.jpg",
                           "buttons": [{
                             "type": "web_url",
                             "url": "https://www.neptunemm.com/",
@@ -153,7 +148,7 @@ function carouselMessage(recipientId, text) {
                             {
                               "type": "postback",
                               "title": "အကြောင်းအရာကြည့်ရန်",
-                              "payload": "YGN_MMAD",
+                              "payload": "MDY_MMAD",
                             },
                             {
                               "type": "postback",
@@ -161,9 +156,10 @@ function carouselMessage(recipientId, text) {
                               "payload": "TO_BACK",
                             } 
                           ] 
-                      }]
-                  } 
-              }
+                      }
+                      ]
+                    } 
+                }
             };
             sendMessage(recipientId, message);
             return true;  
