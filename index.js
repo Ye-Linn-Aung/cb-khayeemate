@@ -136,7 +136,34 @@ function carouselMessage(recipientId, text) {
                             ] 
                         }]
                     } 
-                }
+                },
+                "attachment": {
+                  "type": "template",
+                  "payload": {
+                      "template_type": "generic",
+                      "elements": [{
+                          "title": "ရန်ကုန်",
+                          "subtitle": "ရန်ကုန်အကြောင်းအရာ",
+                          "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Travel-Burma-yangon-shwedagon-pagoda.jpg/1280px-Travel-Burma-yangon-shwedagon-pagoda.jpg",
+                          "buttons": [{
+                            "type": "web_url",
+                            "url": "https://www.neptunemm.com/",
+                            "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
+                            },
+                            {
+                              "type": "postback",
+                              "title": "အကြောင်းအရာကြည့်ရန်",
+                              "payload": "YGN_MMAD",
+                            },
+                            {
+                              "type": "postback",
+                              "title": "နောက်သို့",
+                              "payload": "TO_BACK",
+                            } 
+                          ] 
+                      }]
+                  } 
+              }
             };
             sendMessage(recipientId, message);
             return true;  
