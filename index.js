@@ -96,6 +96,56 @@ function receivedPostback(recipientId, payload_event){
      sendMessage(recipientId, message);
      return true;
   } 
+  if(payload === "NPW_MMAD"){
+    message = { "text": "ကျွန်တော်သည်နေပြည်တော်ဖြစ်သည်။" };
+     sendMessage(recipientId, message);
+     return true;
+  } 
+  if(payload === "MDY_MMST"){
+    message = { "text": "ကျွန်တော်သည်မန္တလေးခရီးတိုဖြစ်သည်။" };
+     sendMessage(recipientId, message);
+     return true;
+  }
+  if(payload === "BGO_MMST"){
+    message = { "text": "ကျွန်တော်သည်ပဲခူးခရီးတိုဖြစ်သည်။" };
+     sendMessage(recipientId, message);
+     return true;
+  }
+  if(payload === "PYP_MMST"){
+    message = { "text": "ကျွန်တော်သည်ဖျာပုံခရီးတိုဖြစ်သည်။" };
+     sendMessage(recipientId, message);
+     return true;
+  } 
+  if(payload === "CHA_MMRX"){
+    message = { "text": "ကျွန်တော်သည်ချောင်သာခရီးဖြစ်သည်။" };
+     sendMessage(recipientId, message);
+     return true;
+  } 
+  if(payload === "NWG_MMRX"){
+    message = { "text": "ကျွန်တော်သည်ငွေဆောင်ခရီးဖြစ်သည်။" };
+     sendMessage(recipientId, message);
+     return true;
+  } 
+  if(payload === "NGA_MMRX"){
+    message = { "text": "ကျွန်တော်သည်ငပလီခရီးဖြစ်သည်။" };
+     sendMessage(recipientId, message);
+     return true;
+  } 
+  if(payload === "TGI_MMUN"){
+    message = { "text": "ကျွန်တော်သည်တောင်ကြီးခရီးဖြစ်သည်။" };
+     sendMessage(recipientId, message);
+     return true;
+  } 
+  if(payload === "BGN_MMUN"){
+    message = { "text": "ကျွန်တော်သည်ပုဂံခရီးဖြစ်သည်။" };
+     sendMessage(recipientId, message);
+     return true;
+  } 
+  if(payload === "POL_MMUN"){
+    message = { "text": "ကျွန်တော်သည်မေမြို့ခရီးဖြစ်သည်။" };
+     sendMessage(recipientId, message);
+     return true;
+  } 
   if(payload === "TO_BACK"){
      message = sendReplymm(recipientId, 'နောက်သို့');
      sendMessage(recipientId, message);
@@ -156,7 +206,28 @@ function carouselMessage(recipientId, text) {
                               "payload": "TO_BACK",
                             } 
                           ] 
-                      }
+                      },
+                      {
+                        "title": "နေပြည်တော်",
+                        "subtitle": "နေပြည်တော်အကြောင်းအရာ",
+                        "image_url": "https://static01.nyt.com/images/2007/10/04/world/04myan.600.jpg?quality=90&auto=webp",
+                        "buttons": [{
+                          "type": "web_url",
+                          "url": "https://www.neptunemm.com/",
+                          "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
+                          },
+                          {
+                            "type": "postback",
+                            "title": "အကြောင်းအရာကြည့်ရန်",
+                            "payload": "NPW_MMAD",
+                          },
+                          {
+                            "type": "postback",
+                            "title": "နောက်သို့",
+                            "payload": "TO_BACK",
+                          } 
+                        ] 
+                    }
                       ]
                     } 
                 }
@@ -170,7 +241,8 @@ function carouselMessage(recipientId, text) {
               "type": "template",
               "payload": {
                   "template_type": "generic",
-                  "elements": [{
+                  "elements": [
+                    {
                       "title": "မန္တလေး",
                       "subtitle": "မန္တလေးအကြောင်းအရာ",
                       "image_url": "https://www.shweyemonhotelmandalay.com/wp-content/uploads/2017/11/attraction-mandalay-750x500.jpg",
@@ -182,7 +254,7 @@ function carouselMessage(recipientId, text) {
                         {
                           "type": "postback",
                           "title": "အကြောင်းအရာကြည့်ရန်",
-                          "payload": "MDY_MMAD",
+                          "payload": "MDY_MMST",
                         },
                         {
                           "type": "postback",
@@ -190,13 +262,210 @@ function carouselMessage(recipientId, text) {
                           "payload": "TO_BACK",
                         } 
                       ] 
-                  }]
+                  },
+                  {
+                    "title": "ပဲခူး",
+                    "subtitle": "ပဲခူးအကြောင်းအရာ",
+                    "image_url": "https://media.tacdn.com/media/attractions-splice-spp-674x446/07/1f/9d/1c.jpg",
+                    "buttons": [{
+                      "type": "web_url",
+                      "url": "https://www.neptunemm.com/",
+                      "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
+                      },
+                      {
+                        "type": "postback",
+                        "title": "အကြောင်းအရာကြည့်ရန်",
+                        "payload": "BGO_MMST",
+                      },
+                      {
+                        "type": "postback",
+                        "title": "နောက်သို့",
+                        "payload": "TO_BACK",
+                      } 
+                    ] 
+                },
+                {
+                  "title": "ဖျာပုံ",
+                  "subtitle": "ဖျာပုံအကြောင်းအရာ",
+                  "image_url": "https://64.media.tumblr.com/3dc3d4db5e25b503147642c1cc06c0cb/tumblr_nkcg1qVCkK1tk3lfgo1_1280.jpg",
+                  "buttons": [{
+                    "type": "web_url",
+                    "url": "https://www.neptunemm.com/",
+                    "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
+                    },
+                    {
+                      "type": "postback",
+                      "title": "အကြောင်းအရာကြည့်ရန်",
+                      "payload": "PYP_MMST",
+                    },
+                    {
+                      "type": "postback",
+                      "title": "နောက်သို့",
+                      "payload": "TO_BACK",
+                    } 
+                  ] 
+              }
+                ]
               } 
           }
       };
       sendMessage(recipientId, message);
       return true;  
-}   
+} 
+if (values[0] === 'အပန်းဖြေခရီး') {
+  message = {
+      "attachment": {
+          "type": "template",
+          "payload": {
+              "template_type": "generic",
+              "elements": [
+                {
+                  "title": "ချောင်းသာ",
+                  "subtitle": "ချောင်းသာအကြောင်းအရာ",
+                  "image_url": "https://www.go-myanmar.com/files/destination-photo/chaung_tha.jpg",
+                  "buttons": [{
+                    "type": "web_url",
+                    "url": "https://www.neptunemm.com/",
+                    "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
+                    },
+                    {
+                      "type": "postback",
+                      "title": "အကြောင်းအရာကြည့်ရန်",
+                      "payload": "CHA_MMRX",
+                    },
+                    {
+                      "type": "postback",
+                      "title": "နောက်သို့",
+                      "payload": "TO_BACK",
+                    } 
+                  ] 
+              },
+              {
+                "title": "ငွေဆောင်",
+                "subtitle": "ငွေဆောင်အကြောင်းအရာ",
+                "image_url": "https://www.withustravels.com/wp-content/uploads/2015/09/Ngwe-Saung-Beach-1.jpg",
+                "buttons": [{
+                  "type": "web_url",
+                  "url": "https://www.neptunemm.com/",
+                  "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
+                  },
+                  {
+                    "type": "postback",
+                    "title": "အကြောင်းအရာကြည့်ရန်",
+                    "payload": "NWG_MMRX",
+                  },
+                  {
+                    "type": "postback",
+                    "title": "နောက်သို့",
+                    "payload": "TO_BACK",
+                  } 
+                ] 
+            },
+            {
+              "title": "ငပလီ",
+              "subtitle": "ငပလီအကြောင်းအရာ",
+              "image_url": "https://www.traveldailymedia.com/assets/2019/01/Hilton-Ngapali.jpg",
+              "buttons": [{
+                "type": "web_url",
+                "url": "https://www.neptunemm.com/",
+                "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
+                },
+                {
+                  "type": "postback",
+                  "title": "အကြောင်းအရာကြည့်ရန်",
+                  "payload": "NGA_MMRX",
+                },
+                {
+                  "type": "postback",
+                  "title": "နောက်သို့",
+                  "payload": "TO_BACK",
+                } 
+              ] 
+          }
+            ]
+          } 
+      }
+  };
+  sendMessage(recipientId, message);
+  return true;  
+}  
+if (values[0] === 'မသိသောခရီး') {
+  message = {
+      "attachment": {
+          "type": "template",
+          "payload": {
+              "template_type": "generic",
+              "elements": [
+                {
+                  "title": "တောင်ကြီး",
+                  "subtitle": "တောင်ကြီးအကြောင်းအရာ",
+                  "image_url": "https://discoverydmc.com/wp-content/uploads/2017/09/taunggyi-1.jpg",
+                  "buttons": [{
+                    "type": "web_url",
+                    "url": "https://www.neptunemm.com/",
+                    "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
+                    },
+                    {
+                      "type": "postback",
+                      "title": "အကြောင်းအရာကြည့်ရန်",
+                      "payload": "TGI_MMUN",
+                    },
+                    {
+                      "type": "postback",
+                      "title": "နောက်သို့",
+                      "payload": "TO_BACK",
+                    } 
+                  ] 
+              },
+              {
+                "title": "ပုဂံ",
+                "subtitle": "ပုဂံအကြောင်းအရာ",
+                "image_url": "https://cdn.destguides.com/files/store/itinerary/90/background_image/jpeg_max-7eb11f893896fba0bde46e91619e5737.jpeg",
+                "buttons": [{
+                  "type": "web_url",
+                  "url": "https://www.neptunemm.com/",
+                  "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
+                  },
+                  {
+                    "type": "postback",
+                    "title": "အကြောင်းအရာကြည့်ရန်",
+                    "payload": "BGN_MMUN",
+                  },
+                  {
+                    "type": "postback",
+                    "title": "နောက်သို့",
+                    "payload": "TO_BACK",
+                  } 
+                ] 
+            },
+            {
+              "title": "မေမြို့",
+              "subtitle": "မေမြို့အကြောင်းအရာ",
+              "image_url": "https://d13jio720g7qcs.cloudfront.net/images/tours/740_390/5eb27a2adb486.jpg",
+              "buttons": [{
+                "type": "web_url",
+                "url": "https://www.neptunemm.com/",
+                "title": "ဝဘ်ဆိုက်တွင်ကြည့်ရန်"
+                },
+                {
+                  "type": "postback",
+                  "title": "အကြောင်းအရာကြည့်ရန်",
+                  "payload": "POL_MMUN",
+                },
+                {
+                  "type": "postback",
+                  "title": "နောက်သို့",
+                  "payload": "TO_BACK",
+                } 
+              ] 
+          }
+            ]
+          } 
+      }
+  };
+  sendMessage(recipientId, message);
+  return true;  
+}  
     return false;  
 };   
 
