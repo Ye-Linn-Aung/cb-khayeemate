@@ -142,7 +142,7 @@ function receivedPostback(recipientId, payload_event){
      return true;
   } 
   if(payload === "POL_MMUN"){
-    message = { "text": "ကျွန်တော်သည်မေမြို့ခရီးဖြစ်သည်။" };
+    message = { "text": "ကျွန်တော်သည်မေခရီးဖြစ်သည်။" };
      sendMessage(recipientId, message);
      return true;
   } 
