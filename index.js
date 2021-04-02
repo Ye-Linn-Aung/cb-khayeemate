@@ -68,7 +68,7 @@ app.post('/webhook', function (req, res) {
 });
 
 // GET STARTED 
-function setupGetStartedButton(res){
+function setupGetStartedButton(messageData){
   var messageData = {
           "get_started":[
           {
@@ -79,22 +79,21 @@ function setupGetStartedButton(res){
 
   // Start the request
   request({
-      url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ PAGE_ACCESS_TOKEN,
+      // url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ PAGE_ACCESS_TOKEN,
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       form: messageData
   },
-  function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-          // Print out the response body
-          res.send(body);
-
-      } else { 
-          // TODO: Handle errors
-          res.send(body);
-      }
-  });
-}
+  function(error, response, body) {
+    if (error) {
+        console.log('Error sending message: ', error);
+    } else if (response.body.error) {
+        console.log('Error: ', response.body.error);
+    }
+});
+};
 
 // generic function sending messages
 function sendMessage(recipientId, message) { 
