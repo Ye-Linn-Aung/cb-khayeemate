@@ -16,6 +16,11 @@ app.get('/', function (req, res) {
     res.send('Final Editing');
 }); 
 
+app.get('/setup',function(req,res){
+
+  setupGetStartedButton(res);
+});
+
 // Facebook Webhook 
 app.get('/webhook', function (req, res) {
     if (req.query['hub.verify_token'] === 'testbot_verify_token') {
@@ -62,9 +67,37 @@ app.post('/webhook', function (req, res) {
     res.sendStatus(200);
 });
 
+// GET STARTED 
+function setupGetStartedButton(res){
+  var messageData = {
+          "get_started":[
+          {
+              "payload":"GET_STARTED"
+              }
+          ]
+  };
+
+  // Start the request
+  request({
+      url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ PAGE_ACCESS_TOKEN,
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      form: messageData
+  },
+  function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+          // Print out the response body
+          res.send(body);
+
+      } else { 
+          // TODO: Handle errors
+          res.send(body);
+      }
+  });
+}
 
 // generic function sending messages
-function sendMessage(recipientId, message) {
+function sendMessage(recipientId, message) { 
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
@@ -162,7 +195,7 @@ function carouselMessage(recipientId, text) {
             message = {
                 "attachment": {
                     "type": "template",
-                    "payload": {
+                    "payload": { 
                         "template_type": "generic",
                         "elements": [
                           {
